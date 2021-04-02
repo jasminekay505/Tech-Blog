@@ -26,8 +26,7 @@ router.get('/', async (req, res) => {
 
 //Login page
 router.get('/login', (req, res) => {
-    if (req.session.loggedIn) 
-    {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
@@ -36,8 +35,7 @@ router.get('/login', (req, res) => {
 
 //Signup page
 router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) 
-    {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
@@ -47,59 +45,45 @@ router.get('/signup', (req, res) => {
 //Single Post
 router.get('/post/:id', withAuth, (req, res) => {
     try {
-        
-    } catch (err) {
-        res.status(500).json(err);
-    }
-    Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        attributes: [
-            'id',
-            'title',
-            'content',
-            'date_created',
-        ],
-        include: [
-            {
-                model: Comment,
-                attributes: [
-                    'id',
-                    'content',
-                    'date_created',
-                    'user_id',
-                    'post_id'
-                ],
-                include: {
-                    model: User,
-                    attributes: [
-                        'username'
-                    ]
-                },
+        const postData = await Post.findOne({
+            where: {
+                id: req.params.id
             },
-            {
-                model: User,
-                attributes: [
-                    'username'
-                ],
-            },
-        ],
-    })
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: 'No post found with this id!' });
-                return;
+            include: {
+                model: User
             }
-            const post = dbPostData.get({ plain: true });
-            res.render('single-post', {
-                post,
-                loggedIn: req.session.loggedIn
-            });
-        })
-        .catch(err => {
-            res.status(500).json(err);
         });
+
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id!' });
+            return;
+        }
+
+        const post = postData.get({ plain: true });
+
+        const commentData = await Comment.findAll({
+            where: {
+                post_id: post.id
+            },
+            include: {
+                model: User
+            }
+        });
+
+        if (!commentData) {
+            res.status(404).json({ message: 'No comment found with this id!' });
+            return;
+        }
+
+        const comments = commentData.map(comment => comment.get({ plain: true }))
+
+        res.render('single-post', {
+            post, comments, loggedIn: req.session.loggedIn
+        });
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
 module.exports = router;
