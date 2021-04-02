@@ -7,12 +7,13 @@ const withAuth = require('../../utils/auth');
 router.post('/', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.create({
-            ...req.body,
+            content: req.body.content,
             user_id: req.session.user_id,
             post_id: req.session.post_id
         });
+
         res.status(200).json(commentData);
-        
+
     } catch (error) {
         res.status(400).json(err);
     }
@@ -32,7 +33,8 @@ router.delete('/:id', withAuth, async (req, res) => {
             return;
         }
 
-        res.status(200).json(categoryData);
+        res.status(200).json(commentData);
+        
     } catch (err) {
         res.status(500).json(err);
     }
