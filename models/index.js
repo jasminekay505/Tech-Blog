@@ -3,10 +3,10 @@ const Post = require('./Post');
 const Comment = require('./Comment');
 
 //Set up user relationships
-User.hasmany(Post, { 
+User.hasMany(Post, { 
     foreignKey: 'user_id',
 });
-User.hasmany(Comment, {
+User.hasMany(Comment, {
     foreignKey:'user_id',
 });
 
