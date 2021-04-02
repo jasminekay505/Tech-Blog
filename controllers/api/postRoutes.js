@@ -14,7 +14,7 @@ router.post('/', withAuth, async (req, res) => {
 
         res.status(200).json(postData);
 
-    } catch (error) {
+    } catch (err) {
         res.status(400).json(err);
     }
 });
@@ -39,10 +39,11 @@ router.put('/:id', withAuth, async (req, res) => {
 
         res.status(200).json(postData);
 
-    } catch (error) {
+    } catch (err) {
         res.status(500).json(err);
     }
 });
+
 //Delete a post
 router.delete('/:id', withAuth, async (req, res) => {
     try {
