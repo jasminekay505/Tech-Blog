@@ -75,7 +75,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
             return;
         }
 
-        const comments = commentData.map(comment => comment.get({ plain: true }))
+        const comments = commentData.map(comment => comment.get({ plain: true }));
 
         res.render('single-post', {
             post, comments, loggedIn: req.session.loggedIn

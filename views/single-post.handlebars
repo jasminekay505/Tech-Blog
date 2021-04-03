@@ -1,7 +1,6 @@
 {{> post-info post}}
 
 {{#if loggedIn}}
-<div class="container">
     <form>
         <div class="form-group comment-form">
             <label for="comment-content">Comment</label>
@@ -9,8 +8,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Add Comment</button>
     </form>
-
-</div>
 {{/if}}
 
 {{> comments post.comments}}
