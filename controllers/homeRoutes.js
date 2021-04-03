@@ -1,7 +1,7 @@
 // Import dependencies
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
-const withAuth = require('../../utils/auth');
+const withAuth = require('../utils/auth');
 
 //Homepage - show all posts
 router.get('/', async (req, res) => {
@@ -43,7 +43,7 @@ router.get('/signup', (req, res) => {
 });
 
 //Single Post
-router.get('/post/:id', withAuth, (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findOne({
             where: {
