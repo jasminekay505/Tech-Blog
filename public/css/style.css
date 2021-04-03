@@ -1,3 +1,7 @@
+body { 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .navbar { 
     background-color: #d52e3f;
     font-family: 'Lobster Two', cursive;
@@ -19,7 +23,16 @@
                 30px 30px 0px #c11a2b;
 }
 
-.container-fluid { 
-    justify-content: center;
+.card { 
+    border-color: #46b59b;
 }
 
+.card-title { 
+    color:#052939;
+}
+
+.btn-primary {
+    background-color:#052939;
+    border:#46b59b; 
+    color: #46b59b; 
+}
