@@ -1,3 +1,4 @@
+//Add a new comment
 const commentFormHandler = async (event) => {
     event.preventDefault();
 
@@ -22,6 +23,31 @@ const commentFormHandler = async (event) => {
     }
 }
 
-document
-    .querySelector('.comment-form')
-    .addEventListener('submit', commentFormHandler);
+document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
+
+//Delete comment
+const deleteCommentHandler = async (event) => {
+    event.preventDefault();
+
+    // Collect values from the comment form
+    const post_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+    ];
+
+    // Send a DELTE request to the API endpoint
+    const response = await fetch(`/api/comments/${id}`, {
+        method: 'DELETE',
+        body: JSON.stringify({ comment_id: id }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        // If successful, redirect the browser to the dashboard page
+        document.location.reload();
+    } else {
+        alert(response.statusText);
+    }
+}
+
+//TO DO: add delete comment button
+document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
