@@ -1,17 +1,11 @@
-<div class="container">
-    <div class="row">
-        <h5>Dashboard: Your Posts:</h5>
-        {{#if posts.length}}
-        <div>
-            {{#each posts as |post|}}
-            {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}"><button class="btn btn-primary" type="submit">Edit Post</button></a>
-            <a href="/dashboard/edit/{{post.id}}"><button class="btn btn-primary" type="submit">Edit Post</button></a>
+<h2>Your Posts:</h2>
 
-        </div>
-        {{/each}}
-        {{else}}
-        <h4>No posts yet!</h4>
-        {{/if}}
+{{#if posts.length}}
+    <div>
+        {{#each posts as |post|}}
+        {{> post-info post}}
     </div>
-</div>
+    {{/each}}
+{{else}}
+<h4>No posts yet!</h4>
+{{/if}}
