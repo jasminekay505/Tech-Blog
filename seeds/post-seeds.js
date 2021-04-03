@@ -12,7 +12,7 @@ const postData = [
         user_id: 2
     },
     {
-        title: "JavScript",
+        title: "JavaScript",
         content: "JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification.",
         user_id: 3
     },
