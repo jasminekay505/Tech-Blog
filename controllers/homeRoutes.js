@@ -51,6 +51,12 @@ router.get('/post/:id', withAuth, async (req, res) => {
             },
             include: {
                 model: User
+            },
+            include: { 
+                model: Comment,
+                include:  { 
+                    model:User
+                }
             }
         });
 
