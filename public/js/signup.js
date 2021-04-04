@@ -17,7 +17,6 @@ const signupFormHandler = async (event) => {
 
         if (response.ok) {
             // If successful, redirect the browser to the dashboard page
-            console.log('success! signedup!')
             document.location.replace('/dashboard');
         } else {
             alert(response.statusText);

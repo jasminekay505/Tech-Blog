@@ -36,3 +36,8 @@ body {
     border:#46b59b; 
     color: #46b59b; 
 }
+.no-button{ 
+    background: #d52e3f;
+    border:none;
+    color: rgba(255,255,255,.5);
+}
