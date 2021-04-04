@@ -1,6 +1,6 @@
 {{> post-info post}}
 
-{{#if loggedIn}}
+{{#if logged_in}}
     <form>
         <div class="form-group comment-form">
             <label for="comment-content">Comment</label>
@@ -12,6 +12,6 @@
 
 {{> comments post.comments}}
 
-{{#if loggedIn}}
+{{#if logged_in}}
 <script src = "./js/comment.js"></script>
 {{/if}}
