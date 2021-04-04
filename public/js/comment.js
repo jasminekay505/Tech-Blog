@@ -3,7 +3,7 @@ const commentFormHandler = async (event) => {
     event.preventDefault();
 
     // Collect values from the comment form
-    const content = document.querySelector('#comment-content').value.trim();
+    const content = document.querySelector('textarea[name="comment-content"]').value.trim();
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
@@ -16,7 +16,7 @@ const commentFormHandler = async (event) => {
     });
 
     if (response.ok) {
-        // If successful, redirect the browser to the dashboard page
+        // If successful, redirect the browser to the post page
         document.location.reload();
     } else {
         alert(response.statusText);
@@ -42,7 +42,7 @@ const deleteCommentHandler = async (event) => {
     });
 
     if (response.ok) {
-        // If successful, redirect the browser to the dashboard page
+        // If successful, redirect the browser to the post page
         document.location.reload();
     } else {
         alert(response.statusText);

@@ -2,12 +2,12 @@
 <br>
 <h5>Comments:</h5>
 {{> comments post.comments}}
-
+<br>
 {{#if logged_in}}
-    <form>
-        <div class="form-group comment-form">
-            <label for="comment-content">Comment</label>
-            <textarea class="form-control" id="comment-content" rows="3"></textarea>
+    <form class = "comment-form">
+        <div class="form-group " style="width: 50rem;">
+            <label for="comment-content">What do you think about this post?</label>
+            <textarea class="form-control" name = "comment-content" id="comment-content" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Add Comment</button>
     </form>
