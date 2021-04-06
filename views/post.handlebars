@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <h5 class="card-title"><a href='/post/{{post.id}}'>{{post.title}}</a></h5>
+            <p class="card-text" id="card-details">Posted by: {{post.user.username}} on {{format_date post.date_created}}
+            </p>
+            <br>
+            <p class="card-text">{{post.content}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card mx-auto" style="width: 50rem;">
+        <div class="card-body">
+            <h5 class="card-title">Comments:</h5>
+            {{#each post.comments as |comment|}}
+            <p>{{comment.comment_content}} - {{comment.user.username}}, {{format_date comment.date_created}}</p>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+{{#if logged_in}}
+<div class="row">
+    <div class="card mx-auto" style="width: 50rem;">
+        <div class="card-body">
+            <form class="form " id="new-comment-content">
+                <div class="form-group">
+                    <label for="comment-content">Add a comment:</label>
+                    <textarea class="form-control" id="comment-content" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if logged_in}}
+<script src="/js/comment.js"></script>
+{{/if}}

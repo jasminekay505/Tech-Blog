@@ -29,27 +29,21 @@ document.querySelector('.new-post').addEventListener('submit', addPostHandler);
 
 
 //Delete a post
-const deletePostHandler = async (event) => {
-    event.preventDefault();
+const delButtonHandler = async (event) => {
+    const id = event.target.getAttribute('delete-data-id');
 
-    // Collect values from the login form
-    const post_id = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-      ];
+    const response = await fetch(`/api/posts/${id}`, {
+        method: 'DELETE',
+    });
 
-        // Send a POST request to the API endpoint
-        const response = await fetch(`/api/posts/${id}`, {
-            method: 'DELETE',
-            body: JSON.stringify({ post_id: id }),
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (response.ok) {
-            // If successful, redirect the browser to the dashboard page
-            document.location.replace('/dashboard');
-        } else {
-            alert(response.statusText);
-        }
+    if (response.ok) {
+        document.location.replace('/dashboard');
+    } else {
+        alert('Failed to delete post');
     }
 
-document.querySelector('.delete-post').addEventListener('submit', deletePostHandler);
+};
+
+document
+    .querySelector('#delete-button')
+    .addEventListener('click', delButtonHandler);

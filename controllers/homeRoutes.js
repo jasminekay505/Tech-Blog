@@ -43,52 +43,52 @@ router.get('/signup', (req, res) => {
 });
 
 //Single Post
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try {
-        const postData = await Post.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: {
-                model: User
-            },
-            include: { 
-                model: Comment,
-                include:  { 
-                    model:User
-                }
-            }
+        const postData = await Post.findbyPk(req.params.id, {
+            include: [
+                {
+                    model: Comment,
+                    include: [
+                        {
+                            model: User,
+                        }
+                    ]
+                },
+                {
+                    model: User,
+                },
+            ],
         });
-
-        if (!postData) {
-            res.status(404).json({ message: 'No post found with this id!' });
-            return;
-        }
 
         const post = postData.get({ plain: true });
 
-        const commentData = await Comment.findAll({
-            where: {
-                post_id: post.id
-            },
-            include: {
-                model: User
-            }
-        });
-
-        if (!commentData) {
-            res.status(404).json({ message: 'No comment found with this id!' });
-            return;
-        }
-
-        const comments = commentData.map(comment => comment.get({ plain: true }));
-
-        res.render('single-post', {
-            post, comments, logged_in: req.session.logged_in
+        res.render('post', {
+            post,
+            logged_in: req.session.logged_in
         });
 
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
+    }
+});
+
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+        // Find the logged in user based on the session ID
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] },
+            include: [{ model: Post }],
+        });
+
+        const user = userData.get({ plain: true });
+
+        res.render('dashboard', {
+            ...user,
+            logged_in: true
+        });
+    } catch (err) {
+        res.status(500).json(err);
     }
 });
 
