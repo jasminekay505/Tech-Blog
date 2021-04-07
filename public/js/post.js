@@ -29,6 +29,7 @@ document.querySelector('.new-post').addEventListener('submit', addPostHandler);
 
 
 //Delete a post
+
 const delButtonHandler = async (event) => {
     const id = event.target.getAttribute('delete-data-id');
 
@@ -43,6 +44,7 @@ const delButtonHandler = async (event) => {
     }
 
 };
+
 
 document
     .querySelector('#delete-button')

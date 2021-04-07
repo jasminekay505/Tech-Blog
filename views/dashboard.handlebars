@@ -18,27 +18,28 @@
         </div>
     </div>
 </div>
-
 <div class="row">
-{{#if posts.length}}
-  <div class="card">
-    <div class="post-list">
-      <div class="card-body">
-        <h3 class="card-title">Added Posts:</h3>
-        {{#each posts as |post|}}
-        <div class="row mb-2">
-          <div class="col-md-8">
-            <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
-          </div>
-          <div class="col-md-4">
-            <button class="btn btn-sm btn-danger" id = "delete-button" delete-data-id="{{post.id}}">DELETE</button>
-            {{!-- <button class="btn btn-sm btn-danger" id = "update-button" update-data-id="{{post.id}}">EDIT</button> --}}
-          </div>
+    {{#if posts.length}}
+    <div class="card" style="width: 40rem;">
+        <div class="post-list">
+            <div class="card-body">
+                <h3 class="card-title">Added Posts:</h3>
+                {{#each posts as |post|}}
+                <div class="row mb-2">
+                    <div class="col-md-8">
+                        <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-sm btn-danger" id="delete-button"
+                            delete-data-id="{{post.id}}">DELETE</button>
+                        {{!-- <button class="btn btn-sm btn-danger" id="update-button"
+                            update-data-id="{{post.id}}">EDIT</button> --}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
         </div>
-        {{/each}}
-      </div>
-      {{/if}}
     </div>
 </div>
-
 <script src="/js/post.js"></script>

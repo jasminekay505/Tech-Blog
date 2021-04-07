@@ -43,13 +43,15 @@ router.delete('/:id', withAuth, async (req, res) => {
     try {
         await Post.destroy({
             where: {
-                id: req.params.id
+                id: req.params.id,
+                user_id: req.session.user_id,
             }
         });
 
-        res.status(200);
+        res.status(204).end();
 
     } catch (err) {
+        console.log(err);
         res.status(400).json(err);
     }
 });
